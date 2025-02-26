@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <div>
       <img
-        src="https://console.cloudinary.com/pm/c-3df5d10c3b1aa077999111d3faf6d5/media-explorer?assetId=0c2ffab1d1e45b002d23db84d638aeb0"
+        src="https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740574071/cld-sample-4.jpg"
         alt=""
       />
       <Nabar />
