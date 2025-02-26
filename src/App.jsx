@@ -20,12 +20,11 @@ function App() {
           <Route path="detail1" element={<Detail1 />} />
           <Route />
         </Route>
-
-        {/* <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/*" element={<LoginPage />} /> */}
+        <Route path="/*" element={<LoginPage />} />
       </Routes>
     </>
   );
