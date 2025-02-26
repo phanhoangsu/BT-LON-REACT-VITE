@@ -7,6 +7,10 @@ import Footer from "../compunent/Footer";
 const HomePage = () => {
   return (
     <div>
+      <img
+        src="https://console.cloudinary.com/pm/c-3df5d10c3b1aa077999111d3faf6d5/media-explorer?assetId=0c2ffab1d1e45b002d23db84d638aeb0"
+        alt=""
+      />
       <Nabar />
       <Banner />
       <div className="py-8 text-center ">
