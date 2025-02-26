@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div className="banner h-[400px] w-[80vw] mg-auto">
       <div className="ml-[40px] pt-[140px]">
@@ -9,7 +11,10 @@ const Banner = () => {
           <h1>20% OFF ON NEW </h1>
           <h1>SEASON </h1>
         </div>
-        <button className="bg-gray-950 text-amber-50 mt-[10px] cursor-pointer rounded">
+        <button
+          onClick={() => navigate("/shop")}
+          className="bg-gray-950 text-amber-50 mt-[10px] cursor-pointer rounded"
+        >
           Browse collection
         </button>
       </div>

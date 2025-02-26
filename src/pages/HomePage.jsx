@@ -3,14 +3,11 @@ import Nabar from "../compunent/Nabar";
 import Banner from "../compunent/Banner";
 import { IMG } from "../untils/const";
 import Footer from "../compunent/Footer";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   return (
     <div>
-      <img
-        src="https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740574071/cld-sample-4.jpg"
-        alt=""
-      />
       <Nabar />
       <Banner />
       <div className="py-8 text-center ">
