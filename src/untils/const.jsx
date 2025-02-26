@@ -1,9 +1,29 @@
 export const IMG = [
-  { name: "iPhone", image: "src/assets/product_1.png" },
-  { name: "Mac", image: "src/assets/product_2.png" },
-  { name: "iPad", image: "src/assets/product_3.png" },
-  { name: "WATCH", image: "src/assets/product_4.png" },
-  { name: "AirPods", image: "src/assets/product_5.png" },
+  {
+    name: "iPhone",
+    image:
+      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_1_vgjshk.png",
+  },
+  {
+    name: "Mac",
+    image:
+      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_2_tvvjod.png",
+  },
+  {
+    name: "iPad",
+    image:
+      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_3_pwmqbh.png",
+  },
+  {
+    name: "WATCH",
+    image:
+      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_4_ckpjew.png",
+  },
+  {
+    name: "AirPods",
+    image:
+      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_5_mryzua.png",
+  },
 ];
 
 export const COLORS = [
