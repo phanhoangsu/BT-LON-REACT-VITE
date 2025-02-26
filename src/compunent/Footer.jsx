@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Footer = () => {
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     axios
@@ -10,7 +11,7 @@ const Footer = () => {
         "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74"
       )
       .then((response) => {
-        // console.log("API Response:", response.data);
+        console.log("API Response:", response.data);
         setProducts(response.data.slice(0, 8));
       })
       .catch((error) => {
@@ -27,14 +28,18 @@ const Footer = () => {
       <div className="w-[80vw] mx-auto mb-[15px] cursor-pointer">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
-            <div key={product._id} className="rounded-2xl shadow-lg p-4">
+            <div
+              key={product._id}
+              className="rounded-2xl shadow-lg p-4"
+              onClick={() => setSelectedProduct(product)}
+            >
               <img
                 src={product.img1}
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-xl"
               />
-              <h3 className="text-lg font-semibold mt-2 ">{product.name}</h3>
-              <p className="text-red-500 font-bold ">
+              <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
+              <p className="text-red-500 font-bold">
                 {formatPrice(product.price)} VND
               </p>
             </div>
@@ -42,6 +47,41 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Popup sản phẩm */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg relative">
+            {/* Nút đóng popup */}
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+              onClick={() => setSelectedProduct(null)}
+            >
+              ✖
+            </button>
+
+            {/* Nội dung sản phẩm */}
+            <div className="flex flex-col md:flex-row gap-4">
+              <img
+                src={selectedProduct.img1}
+                alt={selectedProduct.name}
+                className="w-40 h-40 object-cover rounded-md"
+              />
+              <div>
+                <h2 className="text-xl font-bold">{selectedProduct.name}</h2>
+                <p className="text-red-500 font-semibold text-lg">
+                  {formatPrice(selectedProduct.price)} VND
+                </p>
+                <p className="text-gray-600 mt-2">
+                  {selectedProduct.short_desc}
+                </p>
+                <button className="mt-4 bg-black text-white px-4 py-2 rounded-md">
+                  View Detail
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* FREE SHIPPING */}
       <div className="bg-gray-100 py-8 w-[80vw] mg-auto">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
@@ -70,7 +110,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {/* //LET'S BE FRIENDS! */}
+      {/* LET'S BE FRIENDS! */}
       <div className="bg-gray-100 py-8 px-4 w-[80vw] mg-auto">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Text Section */}
@@ -95,9 +135,9 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* // phần cuối */}
+      {/*  phần cuối */}
 
-      <footer className="bg-black text-white py-10">
+      <div className="bg-black text-white py-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           {/* Customer Services */}
           <div>
@@ -182,7 +222,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 };

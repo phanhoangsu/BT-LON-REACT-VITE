@@ -7,14 +7,7 @@ const DetailPage = () => {
     <div className="mg-auto bg-gray-100">
       <Outlet />
       <div className="p-4">
-        <div className="mt-4 space-x-4">
-          {/* <Link to="detail1" className="text-blue-500">
-            Detail 1
-          </Link>
-          <Link to="detail2" className="text-blue-500">
-            Detail 2
-          </Link> */}
-        </div>
+        <div className="mt-4 space-x-4"></div>
 
         <div className="mt-6 border-t pt-4"></div>
       </div>

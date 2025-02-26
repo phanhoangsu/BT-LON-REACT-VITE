@@ -9,6 +9,7 @@ import RegisterPage from "./pages/RegisterPage";
 import Detail1 from "./compunent/Detail1";
 import Detail2 from "./compunent/Detail2";
 import ShopPage from "./pages/ShopPage";
+import ProductDetail from "./compunent/ProductDetail";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
+        <Route path="/product/:productId" element={<ProductDetail />} />
+
         <Route path="/detail/:code" element={<DetailPage />}>
           <Route path="detail1" element={<Detail1 />} />
           <Route />
