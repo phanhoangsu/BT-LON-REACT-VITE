@@ -1,9 +1,9 @@
 export const IMG = [
-  { name: "iPhone", image: "/src/assets/product_1.png" },
-  { name: "Mac", image: "../src/assets/product_2.png" },
-  { name: "iPad", image: "../src/assets/product_3.png" },
-  { name: "WATCH", image: "../src/assets/product_4.png" },
-  { name: "AirPods", image: "../src/assets/product_5.png" },
+  { name: "iPhone", image: "src/assets/product_1.png" },
+  { name: "Mac", image: "src/assets/product_2.png" },
+  { name: "iPad", image: "src/assets/product_3.png" },
+  { name: "WATCH", image: "src/assets/product_4.png" },
+  { name: "AirPods", image: "src/assets/product_5.png" },
 ];
 
 export const COLORS = [
