@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    // Clear error when user starts typing again
+    // Xóa lỗi khi người dùng bắt đầu gõ lại
     if (error && name === "email") {
       setError("");
     }
@@ -30,15 +30,15 @@ const RegisterPage = () => {
     password = password.trim();
     phone = phone.trim();
 
-    // Check if all fields are filled
+    // Kiểm tra xem tất cả các trường đã được điền chưa
     if (!fullName || !email || !password || !phone) {
       setError("Please fill in all fields.");
       return;
     }
 
-    // Strict email validation (requires a domain after @)
+    // Xác thực email nghiêm ngặt (yêu cầu tên miền sau @)
     if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setError("Please enter a valid email address (e.g., user@gmail.com).");
+      setError("Vui lòng nhập địa chỉ email hợp lệ (ví dụ: user@gmail.com).");
       return;
     }
 
@@ -55,7 +55,7 @@ const RegisterPage = () => {
     // Check if email already exists
     let users = JSON.parse(localStorage.getItem("users")) || [];
     if (users.some((user) => user.email === email)) {
-      setError("Email already exists.");
+      setError("Email đã tồn tại");
       return;
     }
 
@@ -114,7 +114,7 @@ const RegisterPage = () => {
           </button>
         </form>
         <p className="text-center text-sm mt-4">
-          Already have an account?{" "}
+          Already have an account?
           <a href="/login" className="text-blue-500">
             Login
           </a>
