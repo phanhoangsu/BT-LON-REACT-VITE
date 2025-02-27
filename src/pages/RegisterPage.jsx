@@ -12,55 +12,68 @@ const RegisterPage = () => {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    // Clear error when user starts typing again
+    if (error && name === "email") {
+      setError("");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
 
-    const { fullName, email, password, phone } = formData;
+    let { fullName, email, password, phone } = formData;
+    fullName = fullName.trim();
+    email = email.trim().toLowerCase();
+    password = password.trim();
+    phone = phone.trim();
 
-    // Kiểm tra input
+    // Check if all fields are filled
     if (!fullName || !email || !password || !phone) {
-      setError("Vui lòng điền đầy đủ thông tin.");
-      return;
-    }
-    if (!email.includes("@")) {
-      setError("Email không hợp lệ. ");
-      return;
-    }
-    if (password.length < 8) {
-      setError("Mật khẩu phải có ít nhất 8 ký tự.");
-      return;
-    }
-    if (!/^[0-9]+$/.test(phone)) {
-      setError("Vui lòng nhập lại Phone");
+      setError("Please fill in all fields.");
       return;
     }
 
-    // Kiểm tra email đã tồn tại chưa
+    // Strict email validation (requires a domain after @)
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      setError("Please enter a valid email address (e.g., user@gmail.com).");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (!/^\d{10,}$/.test(phone)) {
+      setError("Phone number must be at least 10 digits.");
+      return;
+    }
+
+    // Check if email already exists
     let users = JSON.parse(localStorage.getItem("users")) || [];
     if (users.some((user) => user.email === email)) {
-      setError("Email đã tồn tại.");
+      setError("Email already exists.");
       return;
     }
 
-    // Lưu user vào localStorage
-    users.push(formData);
+    // Save user to localStorage
+    const newUser = { fullName, email, password, phone };
+    users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("Đăng ký thành công!");
+    alert("Registration successful!");
     navigate("/login");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[url('https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578420/banner1_l4xyda.jpg')] bg-cover bg-center">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Sign Up</h2>
         {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             name="fullName"
@@ -72,7 +85,7 @@ const RegisterPage = () => {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder="Email (e.g., user@gmail.com)"
             value={formData.email}
             onChange={handleChange}
             className="w-full p-2 border rounded"
@@ -94,13 +107,12 @@ const RegisterPage = () => {
             className="w-full p-2 border rounded"
           />
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="w-full bg-black text-white py-2 rounded hover:opacity-80"
           >
             Sign Up
           </button>
-        </div>
-
+        </form>
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
           <a href="/login" className="text-blue-500">

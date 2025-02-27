@@ -5,9 +5,9 @@ import "./index.css";
 import { UserProvider } from "./context/UserContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  // <UserProvider>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  // </UserProvider>
+  <UserProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </UserProvider>
 );
