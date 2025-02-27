@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Checkou2 = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  // Nhận dữ liệu giỏ hàng từ Cart2
+  const cart = location.state?.cart || [];
+
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  // Tính tổng giá tiền
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  // Xử lý đặt hàng
+  const handlePlaceOrder = () => {
+    if (!fullName || !email || !phone || !address) {
+      setError("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
+    setError("");
+    setOrderSuccess(true);
+
+    setTimeout(() => {
+      setOrderSuccess(false);
+      navigate("/");
+    }, 4000);
+  };
+
   return (
-    <div className="mt-[30px] italic ">
+    <div className="mt-[30px] italic relative">
       <h2 className="text-xl font-semibold mb-4">BILLING DETAILS</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Form nhập thông tin */}
@@ -14,6 +46,8 @@ const Checkou2 = () => {
               </label>
               <input
                 type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
                 placeholder="Enter Your Full Name Here!"
                 className="w-full p-2 border border-gray-300 rounded"
               />
@@ -24,6 +58,8 @@ const Checkou2 = () => {
               </label>
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter Your Email Here!"
                 className="w-full p-2 border border-gray-300 rounded"
               />
@@ -34,6 +70,8 @@ const Checkou2 = () => {
               </label>
               <input
                 type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 placeholder="Enter Your Phone Number Here!"
                 className="w-full p-2 border border-gray-300 rounded"
               />
@@ -44,34 +82,52 @@ const Checkou2 = () => {
               </label>
               <input
                 type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter Your Address Here!"
                 className="w-full p-2 border border-gray-300 rounded"
               />
             </div>
-            <button className="bg-black text-white px-6 py-2 rounded">
+
+            {/* Hiển thị lỗi nếu thiếu thông tin */}
+            {error && <p className="text-red-500">{error}</p>}
+
+            <button
+              className="bg-black text-white px-6 py-2 rounded cursor-pointer"
+              onClick={handlePlaceOrder}
+            >
               Place order
             </button>
           </div>
         </div>
 
         {/* Bảng tổng hợp đơn hàng */}
-        <div className="bg-gray-100 p-4 rounded  ">
+        <div className="bg-gray-100 p-4 rounded">
           <h3 className="text-lg font-semibold">YOUR ORDER</h3>
           <div className="mt-2 text-gray-700">
-            <p>
-              <span className="font-semibold">Apple iPhone 11 64GB</span> -
-              {" asdasda"}
-              10,999,000 VND x 1
-            </p>
-            <p>
-              <span className="font-semibold">Apple AirPods 3rd gen</span> -
-              {" asddsa"}
-              4,390,000 VND x 2
-            </p>
+            {cart.map((item) => (
+              <p key={item.id}>
+                <span className="font-semibold">{item.name}</span> -{" "}
+                {item.quantity} x {item.price.toLocaleString()} VND
+              </p>
+            ))}
           </div>
-          <p className="mt-4 text-xl font-bold">TOTAL: 19,779,000 VND</p>
+          <p className="mt-4 text-xl font-bold">
+            TOTAL: {total.toLocaleString()} VND
+          </p>
         </div>
       </div>
+
+      {/* Modal hiển thị thông báo Order Successfully */}
+      {orderSuccess && (
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p className="text-black font-bold text-xl">
+              ✅ Order Successfully!
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

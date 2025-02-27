@@ -37,7 +37,7 @@ const SignIn = () => {
     localStorage.setItem("currentUser", JSON.stringify(user));
     dispatch({ type: "ON_LOGIN", payload: user });
 
-    alert("Đăng nhập thành công!");
+    alert("Log in successfully!");
     navigate("/");
   };
 

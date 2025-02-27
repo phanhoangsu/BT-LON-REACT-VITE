@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Cart2 from "./compunent/Cart2";
 import ProductDetail from "./compunent/ProductDetail";
+import CartProvider from "./context/CartContext";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import DetailPage from "./pages/DetailPage";
@@ -8,12 +10,11 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ShopPage from "./pages/ShopPage";
-import CartProvider from "./context/CartContext";
-import Cart2 from "./compunent/Cart2";
 
 function App() {
   return (
     <>
+      {/* <UserProvider> */}
       <CartProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -22,7 +23,7 @@ function App() {
 
           <Route path="/product/:productId" element={<ProductDetail />} />
 
-          <Route path="/cart" element={<Cart2 />} />
+          {/* <Route path="/cart" element={<Cart2 />} /> */}
 
           <Route path="/detail/:code" element={<DetailPage />} />
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/*" element={<LoginPage />} />
         </Routes>
       </CartProvider>
+      {/* </UserProvider> */}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import Cart1 from "./Cart1";
 
 const Cart2 = () => {
   const { state, dispatch } = useContext(CartContext); // Sử dụng CartContext
@@ -67,7 +68,7 @@ const Cart2 = () => {
                   <td className="p-3 text-center">
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="text-red-500"
+                      className="text-red-500 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -81,13 +82,13 @@ const Cart2 = () => {
         <div className="mt-6 flex justify-between items-center pt-4 bg-gray-100 p-4">
           <button
             onClick={() => navigate("/shop")}
-            className="text-gray-500 flex items-center"
+            className="text-gray-500 flex items-center cursor-pointer"
           >
             ← Continue shopping
           </button>
           <button
-            onClick={() => navigate("/checkout")}
-            className="bg-black text-white px-6 py-2 rounded flex items-center"
+            onClick={() => navigate("/checkout", { state: { cart } })}
+            className="bg-black text-white px-6 py-2 rounded flex items-center cursor-pointer"
           >
             Proceed to checkout →
           </button>
@@ -107,7 +108,7 @@ const Cart2 = () => {
           placeholder="Enter your coupon"
           className="w-full mt-2 p-2 border rounded"
         />
-        <button className="w-full mt-2 bg-black text-white py-2 rounded">
+        <button className="w-full mt-2 bg-black text-white py-2 rounded cursor-pointer">
           Apply coupon
         </button>
       </div>

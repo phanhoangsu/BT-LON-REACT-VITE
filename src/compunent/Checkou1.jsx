@@ -10,14 +10,14 @@ const Checkou1 = () => {
         <nav className="text-gray-500 italic">
           <span
             onClick={() => navigate("/")}
-            className="text-black font-semibold"
+            className="text-black font-semibold cursor-pointer"
           >
             HOME
           </span>{" "}
           /
           <span
             onClick={() => navigate("/cart")}
-            className="text-black font-semibold"
+            className="text-black font-semibold cursor-pointer"
           >
             CART
           </span>{" "}
