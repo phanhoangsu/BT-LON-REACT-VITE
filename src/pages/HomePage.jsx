@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Nabar from "../compunent/Nabar";
+import React from "react";
 import Banner from "../compunent/Banner";
-import { IMG } from "../untils/const";
 import Footer from "../compunent/Footer";
-import { useNavigate } from "react-router-dom";
+import Nabar from "../compunent/Nabar";
+import { IMG } from "../untils/const";
 
 const HomePage = () => {
   return (

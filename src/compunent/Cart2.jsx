@@ -1,38 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
-const DATA_CART = [
-  {
-    id: 1,
-    name: "Apple iPhone 11 64GB",
-    price: 10999000,
-    quantity: 1,
-    image:
-      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_1_vgjshk.png",
-  },
-  {
-    id: 2,
-    name: "Apple AirPods 3rd gen",
-    price: 4390000,
-    quantity: 2,
-    image:
-      "https://res.cloudinary.com/dbpqjnu0o/image/upload/v1740578421/product_5_mryzua.png",
-  },
-];
 const Cart2 = () => {
-  const [cart, setCart] = useState(DATA_CART);
+  const { state, dispatch } = useContext(CartContext); // Sử dụng CartContext
+  const { cart } = state; // Lấy cart từ state
+  const navigate = useNavigate();
 
-  const updateQuantity = (id, prd) => {
-    setCart(
-      cart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + prd) }
-          : item
-      )
-    );
+  const updateQuantity = (id, change) => {
+    const item = cart.find((item) => item.id === id);
+    const newQuantity = Math.max(1, item.quantity + change);
+    dispatch({ type: "UPDATE_CART", payload: { id, quantity: newQuantity } });
   };
 
   const removeItem = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+    dispatch({ type: "DELETE_CART", payload: { id } });
   };
 
   const subtotal = cart.reduce(
@@ -41,7 +23,7 @@ const Cart2 = () => {
   );
 
   return (
-    <div className="  mx-auto p-6 bg-white shadow-lg flex  ">
+    <div className="mx-auto p-6 bg-white shadow-lg flex">
       <div>
         <h2 className="text-xl font-semibold mb-4">SHOPPING CART</h2>
         <div className="overflow-x-auto">
@@ -96,17 +78,23 @@ const Cart2 = () => {
           </table>
         </div>
 
-        <div className="mt-6 flex justify-between items-center -t pt-4 bg-gray-100 p-4">
-          <button className="text-gray-500 flex items-center">
+        <div className="mt-6 flex justify-between items-center pt-4 bg-gray-100 p-4">
+          <button
+            onClick={() => navigate("/shop")}
+            className="text-gray-500 flex items-center"
+          >
             ← Continue shopping
           </button>
-          <button className="bg-black text-white px-6 py-2 rounded flex items-center">
+          <button
+            onClick={() => navigate("/checkout")}
+            className="bg-black text-white px-6 py-2 rounded flex items-center"
+          >
             Proceed to checkout →
           </button>
         </div>
       </div>
 
-      <div className="mt-[43px] ml-[30px] bg-gray-100 p-4 rounded ">
+      <div className="mt-[43px] ml-[30px] bg-gray-100 p-4 rounded">
         <h3 className="text-lg font-semibold">CART TOTAL</h3>
         <p className="mt-2 text-gray-700">
           Subtotal: {subtotal.toLocaleString()} VND
@@ -126,5 +114,4 @@ const Cart2 = () => {
     </div>
   );
 };
-
 export default Cart2;
