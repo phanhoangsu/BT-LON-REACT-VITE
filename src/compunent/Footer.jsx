@@ -5,13 +5,13 @@ const Footer = () => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const API =
+    "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74";
   useEffect(() => {
     axios
-      .get(
-        "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74"
-      )
+      .get(API)
       .then((response) => {
-        console.log("API Response:", response.data);
+        // console.log("API Response:", response.data);
         setProducts(response.data.slice(0, 8));
       })
       .catch((error) => {

@@ -9,9 +9,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [mainImage, setMainImage] = useState("");
-  const [quantity, setQuantity] = useState(1); // Thêm state cho số lượng
+  const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
-  const { dispatch } = useContext(CartContext); // Sử dụng CartContext
+  const { dispatch } = useContext(CartContext);
 
   const API =
     "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74";

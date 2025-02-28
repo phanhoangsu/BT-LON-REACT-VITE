@@ -14,7 +14,6 @@ const Nabar = () => {
   };
 
   const handleLogout = () => {
-    // console.log("Đã đăng xuất");
     navigate("/login");
     setIsDropdownOpen(false);
   };

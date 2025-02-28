@@ -100,7 +100,6 @@ const Checkou2 = () => {
             </button>
           </div>
         </div>
-
         {/* Bảng tổng hợp đơn hàng */}
         <div className="bg-gray-100 p-4 rounded">
           <h3 className="text-lg font-semibold">YOUR ORDER</h3>
